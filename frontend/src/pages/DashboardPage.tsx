@@ -113,10 +113,10 @@ const DashboardPage: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-green-100 text-green-800'
-      case 'maintenance': return 'bg-yellow-100 text-yellow-800'
-      case 'idle': return 'bg-gray-100 text-gray-800'
-      default: return 'bg-gray-100 text-gray-800'
+      case 'active': return 'bg-green-100 text-black'
+      case 'maintenance': return 'bg-yellow-100 text-black'
+      case 'idle': return 'bg-gray-100 text-black'
+      default: return 'bg-gray-100 text-black'
     }
   }
 
@@ -318,7 +318,7 @@ const DashboardPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="card">
+            <div className="card text-black">
               <h3 className="text-lg font-semibold mb-4 text-black">System Status</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">

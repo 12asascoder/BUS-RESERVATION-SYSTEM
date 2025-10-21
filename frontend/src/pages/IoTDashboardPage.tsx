@@ -311,8 +311,8 @@ const IoTDashboardPage: React.FC = () => {
                 <FireIcon className="h-4 w-4 text-red-600" />
               </div>
               <div>
-                <p className="text-sm font-medium text-red-800">High Temperature Alert</p>
-                <p className="text-xs text-red-600">Temperature exceeds safe threshold</p>
+                <p className="text-sm font-medium text-black">High Temperature Alert</p>
+                <p className="text-xs text-black">Temperature exceeds safe threshold</p>
               </div>
             </div>
           )}
@@ -323,8 +323,8 @@ const IoTDashboardPage: React.FC = () => {
                 <SpeakerWaveIcon className="h-4 w-4 text-yellow-600" />
               </div>
               <div>
-                <p className="text-sm font-medium text-yellow-800">High Noise Level</p>
-                <p className="text-xs text-yellow-600">Noise level may affect passenger comfort</p>
+                <p className="text-sm font-medium text-black">High Noise Level</p>
+                <p className="text-xs text-black">Noise level may affect passenger comfort</p>
               </div>
             </div>
           )}
@@ -335,8 +335,8 @@ const IoTDashboardPage: React.FC = () => {
                 <EyeIcon className="h-4 w-4 text-orange-600" />
               </div>
               <div>
-                <p className="text-sm font-medium text-orange-800">Low Comfort Score</p>
-                <p className="text-xs text-orange-600">Environmental conditions affecting comfort</p>
+                <p className="text-sm font-medium text-black">Low Comfort Score</p>
+                <p className="text-xs text-black">Environmental conditions affecting comfort</p>
               </div>
             </div>
           )}

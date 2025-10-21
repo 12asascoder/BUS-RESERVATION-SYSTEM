@@ -23,7 +23,7 @@ const AITravelAssistantPage: React.FC = () => {
   const [messages, setMessages] = useState<Array<{id: string, text: string, isUser: boolean}>>([
     {
       id: '1',
-      text: `Hello ${user?.firstName || 'there'}! I'm your AI travel assistant. I can help you find the best seats, optimize your route, and provide personalized recommendations. What can I help you with today?`,
+      text: `Hello ${user?.firstName || 'there'}! I'm your AI travel assistant. I can help you with:\n\n🔍 Finding buses for your route\n🪑 Selecting the best seats\n💰 Checking prices and amenities\n🗺️ Route recommendations\n🌤️ Weather updates\n\nWhat can I help you with today?`,
       isUser: false
     }
   ])
@@ -65,6 +65,60 @@ const AITravelAssistantPage: React.FC = () => {
     }
   ]
 
+  const generateAIResponse = (userInput: string): string => {
+    const input = userInput.toLowerCase()
+    
+    // Bus availability queries
+    if (input.includes('bus') && (input.includes('available') || input.includes('book') || input.includes('find'))) {
+      if (input.includes('delhi') && input.includes('mumbai')) {
+        return "Great! I found several buses available for Delhi to Mumbai route:\n\n🚌 **SmartBus Pro SB-001** - Departs 8:00 AM, ₹1,200\n🚌 **FutureBus Elite SB-002** - Departs 2:00 PM, ₹1,500\n🚌 **EcoBus Premium SB-003** - Departs 8:00 PM, ₹1,800\n\nAll buses have AC, WiFi, and RFID boarding. Would you like me to help you select the best seat?"
+      } else if (input.includes('mumbai') && input.includes('delhi')) {
+        return "Perfect! For Mumbai to Delhi route, I have these options:\n\n🚌 **SmartBus Pro SB-001** - Departs 7:30 AM, ₹1,200\n🚌 **FutureBus Elite SB-002** - Departs 1:30 PM, ₹1,500\n🚌 **EcoBus Premium SB-003** - Departs 7:30 PM, ₹1,800\n\nI recommend the morning departure for better traffic conditions. Which timing works best for you?"
+      } else {
+        return "I'd be happy to help you find buses! Please let me know:\n• Your departure city\n• Your destination city\n• Preferred travel date\n\nFor example: 'I want to book a bus from Delhi to Mumbai for tomorrow'"
+      }
+    }
+    
+    // Seat selection queries
+    if (input.includes('seat') || input.includes('sit')) {
+      if (input.includes('window')) {
+        return "For window seats, I recommend:\n\n🪟 **Seats 3A, 7A, 11A** - Best scenic views\n🪟 **Seats 4A, 8A, 12A** - Good comfort + views\n\nThese seats offer excellent views of Indian landscapes and have optimal comfort scores (90%+). Window seats cost ₹50 extra but provide the best experience!"
+      } else if (input.includes('aisle')) {
+        return "For aisle seats, I suggest:\n\n🚶 **Seats 3B, 7B, 11B** - Easy access\n🚶 **Seats 4B, 8B, 12B** - Good legroom\n\nAisle seats are perfect if you prefer easy movement and don't mind occasional disturbance from other passengers."
+      } else {
+        return "I can help you choose the best seat! Here are your options:\n\n🪟 **Window seats (A & D)** - Scenic views, ₹50 extra\n🚶 **Aisle seats (B & C)** - Easy access, standard price\n\nWhat type of seat do you prefer? I can also recommend specific seat numbers based on comfort scores."
+      }
+    }
+    
+    // Route and timing queries
+    if (input.includes('route') || input.includes('time') || input.includes('departure')) {
+      return "Based on current traffic analysis:\n\n⏰ **Morning departures (7-9 AM)** - Best for punctuality (95% on-time)\n⏰ **Afternoon departures (1-3 PM)** - Moderate traffic, good comfort\n⏰ **Evening departures (7-9 PM)** - Night travel, less traffic\n\nFor Indian routes, I recommend morning departures to avoid city rush hours. Which timing works best for your schedule?"
+    }
+    
+    // Price queries
+    if (input.includes('price') || input.includes('cost') || input.includes('₹') || input.includes('rupee')) {
+      return "Here are the current pricing options:\n\n💰 **Standard seats** - ₹1,200-1,500\n💰 **Window seats** - ₹1,250-1,550 (+₹50)\n💰 **Premium buses** - ₹1,800-2,200\n\nPrices vary by bus operator and amenities. All prices include taxes. Would you like me to find the best value option for your budget?"
+    }
+    
+    // Comfort and amenities queries
+    if (input.includes('comfort') || input.includes('amenities') || input.includes('ac') || input.includes('wifi')) {
+      return "Our buses offer premium amenities:\n\n✅ **AC Climate Control** - 24°C optimal temperature\n✅ **Free WiFi** - High-speed internet\n✅ **USB Charging** - Every seat has charging ports\n✅ **Entertainment** - Movies and music\n✅ **RFID Boarding** - Quick and secure\n✅ **IoT Sensors** - Real-time comfort monitoring\n\nAll buses maintain 90%+ comfort scores. Is there a specific amenity you're most interested in?"
+    }
+    
+    // Weather queries
+    if (input.includes('weather') || input.includes('rain') || input.includes('sunny')) {
+      return "Current weather forecast for your route:\n\n🌤️ **Delhi to Mumbai** - Clear skies, 28°C\n🌤️ **Mumbai to Delhi** - Partly cloudy, 26°C\n\nPerfect travel conditions! No delays expected due to weather. A window seat would provide excellent views of the countryside."
+    }
+    
+    // General help queries
+    if (input.includes('help') || input.includes('what can you do')) {
+      return "I'm your AI travel assistant! I can help you with:\n\n🔍 **Find buses** - Search available routes and schedules\n🪑 **Select seats** - Get personalized seat recommendations\n🗺️ **Route optimization** - Find the fastest routes\n💰 **Price comparison** - Compare fares and amenities\n🌤️ **Weather updates** - Check travel conditions\n📱 **Booking assistance** - Guide you through the booking process\n\nWhat would you like help with today?"
+    }
+    
+    // Default response for unclear queries
+    return "I understand you're looking for travel assistance! I can help you with:\n\n• Finding available buses for your route\n• Selecting the best seats\n• Checking prices and amenities\n• Route and timing recommendations\n\nCould you be more specific about what you need help with? For example: 'I want to book a bus from Delhi to Mumbai' or 'Help me choose a good seat'"
+  }
+
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return
 
@@ -78,22 +132,11 @@ const AITravelAssistantPage: React.FC = () => {
     setInputMessage('')
     setIsTyping(true)
 
-    // Simulate AI response
+    // Generate contextual AI response
     setTimeout(() => {
-      const responses = [
-        "Based on your preferences, I recommend choosing a window seat in rows 3-7 for the best experience on Indian routes.",
-        "I've analyzed the current traffic conditions and found that Route A will save you 20 minutes compared to Route B.",
-        "The optimal departure time for your trip would be 8:00 AM to avoid rush hour traffic in Indian cities.",
-        "I can see that SmartBus Pro SB-001 has excellent comfort ratings and is equipped with all the features you prefer.",
-        "Based on your travel history, you seem to prefer quieter environments. I recommend seats away from the engine area.",
-        "The weather forecast shows clear skies for your travel date, so a window seat would provide great views of Indian landscapes.",
-        "For your Mumbai-Delhi route, I suggest booking seats 5A or 5B for optimal comfort and scenic views.",
-        "Based on current IoT sensor data, Bus SB-002 has the best environmental conditions for your comfort preferences."
-      ]
-
       const aiResponse = {
         id: (Date.now() + 1).toString(),
-        text: responses[Math.floor(Math.random() * responses.length)],
+        text: generateAIResponse(inputMessage),
         isUser: false
       }
 
@@ -102,7 +145,7 @@ const AITravelAssistantPage: React.FC = () => {
     }, 1500)
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSendMessage()
@@ -119,7 +162,7 @@ const AITravelAssistantPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Chat Interface */}
         <div className="lg:col-span-2">
-          <div className="card h-96 flex flex-col">
+          <div className="card h-[600px] flex flex-col">
             <div className="flex items-center space-x-3 mb-4 pb-4 border-b">
               <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
                 <SparklesIcon className="h-5 w-5 text-purple-600" />
@@ -144,7 +187,7 @@ const AITravelAssistantPage: React.FC = () => {
                         : 'bg-gray-100 text-black'
                     }`}
                   >
-                    <p className="text-sm">{message.text}</p>
+                    <p className="text-sm whitespace-pre-line">{message.text}</p>
                   </div>
                 </div>
               ))}
@@ -168,7 +211,7 @@ const AITravelAssistantPage: React.FC = () => {
                 type="text"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
                 placeholder="Ask me anything about your trip..."
                 className="flex-1 input-field text-black"
               />

@@ -600,8 +600,8 @@ const PassengerBookingPage: React.FC = () => {
             </div>
             
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-              <h4 className="font-semibold text-blue-800 mb-2">Important Instructions:</h4>
-              <ul className="text-sm text-blue-700 space-y-1">
+              <h4 className="font-semibold text-black mb-2">Important Instructions:</h4>
+              <ul className="text-sm text-black space-y-1">
                 <li>• Please arrive at the boarding point 15-30 minutes before departure</li>
                 <li>• Carry a valid ID proof for verification</li>
                 <li>• Show this ticket or PNR number to the conductor</li>
@@ -610,8 +610,8 @@ const PassengerBookingPage: React.FC = () => {
             </div>
             
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-              <h4 className="font-semibold text-green-800 mb-2">✅ Booking Confirmed!</h4>
-              <p className="text-sm text-green-700">
+              <h4 className="font-semibold text-black mb-2">✅ Booking Confirmed!</h4>
+              <p className="text-sm text-black">
                 Your booking has been added to "My Bookings" and you can view it anytime from your profile.
               </p>
             </div>

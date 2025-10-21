@@ -278,26 +278,26 @@ const AnalyticsPage: React.FC = () => {
         <h3 className="text-lg font-semibold mb-4">AI Recommendations</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <h4 className="font-medium text-blue-800 mb-2">Route Optimization</h4>
-            <p className="text-sm text-blue-700">
+            <h4 className="font-medium text-black mb-2">Route Optimization</h4>
+            <p className="text-sm text-black">
               Consider adjusting departure times for Route Delhi-Jaipur to improve efficiency by 3.2%.
             </p>
           </div>
           <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-            <h4 className="font-medium text-green-800 mb-2">Driver Training</h4>
-            <p className="text-sm text-green-700">
+            <h4 className="font-medium text-black mb-2">Driver Training</h4>
+            <p className="text-sm text-black">
               Schedule eco-driving training for drivers on Bus SB-003 to improve fuel efficiency.
             </p>
           </div>
           <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
-            <h4 className="font-medium text-purple-800 mb-2">Maintenance Alert</h4>
-            <p className="text-sm text-purple-700">
+            <h4 className="font-medium text-black mb-2">Maintenance Alert</h4>
+            <p className="text-sm text-black">
               Bus SB-002 shows signs of decreased efficiency. Schedule maintenance check.
             </p>
           </div>
           <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
-            <h4 className="font-medium text-orange-800 mb-2">Capacity Optimization</h4>
-            <p className="text-sm text-orange-700">
+            <h4 className="font-medium text-black mb-2">Capacity Optimization</h4>
+            <p className="text-sm text-black">
               Route Bangalore-Chennai shows high demand. Consider adding more trips during peak hours.
             </p>
           </div>

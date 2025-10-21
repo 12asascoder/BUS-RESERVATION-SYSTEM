@@ -236,10 +236,10 @@ const RFIDBoardingPage: React.FC = () => {
           {scanResult && (
             <div className={`p-4 rounded-lg ${
               scanResult.includes('successful') 
-                ? 'bg-green-50 border border-green-200 text-green-800' 
+                ? 'bg-green-50 border border-green-200 text-black' 
                 : scanResult.includes('capacity')
-                ? 'bg-orange-50 border border-orange-200 text-orange-800'
-                : 'bg-red-50 border border-red-200 text-red-800'
+                ? 'bg-orange-50 border border-orange-200 text-black'
+                : 'bg-red-50 border border-red-200 text-black'
             }`}>
               <p className="font-medium">{scanResult}</p>
             </div>
@@ -296,8 +296,8 @@ const RFIDBoardingPage: React.FC = () => {
                   <ExclamationTriangleIcon className="h-4 w-4 text-red-600" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-red-800">Passengers Not Boarded</p>
-                  <p className="text-xs text-red-600">
+                  <p className="text-sm font-medium text-black">Passengers Not Boarded</p>
+                  <p className="text-xs text-black">
                     {boardingStatus.missedPassengers} passengers haven't boarded yet
                   </p>
                 </div>
@@ -310,8 +310,8 @@ const RFIDBoardingPage: React.FC = () => {
                   <ExclamationTriangleIcon className="h-4 w-4 text-orange-600" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-orange-800">Bus at Capacity</p>
-                  <p className="text-xs text-orange-600">
+                  <p className="text-sm font-medium text-black">Bus at Capacity</p>
+                  <p className="text-xs text-black">
                     Bus is full ({boardingStatus.boardedPassengers}/{boardingStatus.totalPassengers}) - no more boarding allowed
                   </p>
                 </div>
@@ -324,8 +324,8 @@ const RFIDBoardingPage: React.FC = () => {
                   <ClockIcon className="h-4 w-4 text-yellow-600" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-yellow-800">Low Boarding Rate</p>
-                  <p className="text-xs text-yellow-600">
+                  <p className="text-sm font-medium text-black">Low Boarding Rate</p>
+                  <p className="text-xs text-black">
                     Only {boardingStatus.boardingPercentage.toFixed(0)}% of passengers have boarded
                   </p>
                 </div>
@@ -337,8 +337,8 @@ const RFIDBoardingPage: React.FC = () => {
                 <CheckCircleIcon className="h-4 w-4 text-green-600" />
               </div>
               <div>
-                <p className="text-sm font-medium text-green-800">RFID System Online</p>
-                <p className="text-xs text-green-600">
+                <p className="text-sm font-medium text-black">RFID System Online</p>
+                <p className="text-xs text-black">
                   All RFID readers are functioning normally
                 </p>
               </div>

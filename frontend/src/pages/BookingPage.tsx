@@ -193,7 +193,7 @@ const BookingPage: React.FC = () => {
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {route.features.map((feature, index) => (
-                        <span key={index} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                        <span key={index} className="text-xs bg-blue-100 text-black px-2 py-1 rounded">
                           {feature}
                         </span>
                       ))}

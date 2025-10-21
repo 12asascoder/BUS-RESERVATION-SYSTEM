@@ -362,19 +362,19 @@ p, span, div, label, small {
   }
   
   .seat-available {
-    @apply bg-green-100 border-green-300 text-green-800 hover:bg-green-200;
+    @apply bg-green-100 border-green-300 text-black hover:bg-green-200;
   }
   
   .seat-occupied {
-    @apply bg-red-100 border-red-300 text-red-800 cursor-not-allowed;
+    @apply bg-red-100 border-red-300 text-black cursor-not-allowed;
   }
   
   .seat-selected {
-    @apply bg-blue-100 border-blue-300 text-blue-800;
+    @apply bg-blue-100 border-blue-300 text-black;
   }
   
   .seat-maintenance {
-    @apply bg-yellow-100 border-yellow-300 text-yellow-800 cursor-not-allowed;
+    @apply bg-yellow-100 border-yellow-300 text-black cursor-not-allowed;
   }
   
   .sensor-indicator {
@@ -382,15 +382,15 @@ p, span, div, label, small {
   }
   
   .sensor-good {
-    @apply bg-green-100 text-green-800;
+    @apply bg-green-100 text-black;
   }
   
   .sensor-warning {
-    @apply bg-yellow-100 text-yellow-800;
+    @apply bg-yellow-100 text-black;
   }
   
   .sensor-danger {
-    @apply bg-red-100 text-red-800;
+    @apply bg-red-100 text-black;
   }
 }
 
