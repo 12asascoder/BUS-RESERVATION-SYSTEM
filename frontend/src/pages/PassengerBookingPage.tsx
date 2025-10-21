@@ -281,7 +281,7 @@ const PassengerBookingPage: React.FC = () => {
                     <p className="text-sm font-medium mb-2">Amenities:</p>
                     <div className="flex flex-wrap gap-2">
                       {bus.amenities.map((amenity: string, index: number) => (
-                        <span key={index} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                        <span key={index} className="px-2 py-1 bg-blue-100 text-black text-xs rounded">
                           {amenity}
                         </span>
                       ))}
