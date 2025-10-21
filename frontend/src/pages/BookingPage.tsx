@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useData } from '../contexts/DataContext'
 import { 
   MagnifyingGlassIcon,
   CalendarIcon,
@@ -9,6 +10,8 @@ import {
 } from '@heroicons/react/24/outline'
 
 const BookingPage: React.FC = () => {
+  const { buses } = useData()
+  
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div>
@@ -109,90 +112,34 @@ const BookingPage: React.FC = () => {
       <div className="card">
         <h2 className="text-lg font-semibold mb-4">Available Routes</h2>
         <div className="space-y-4">
-          {[
-            {
-              id: 1,
-              from: 'Mumbai',
-              to: 'Delhi',
-              departure: '08:00',
-              arrival: '20:00',
-              duration: '12h 00m',
-              price: 2500,
-              bus: 'SmartBus Pro SB-001',
-              features: ['WiFi', 'AC', 'USB Ports', 'Entertainment']
-            },
-            {
-              id: 2,
-              from: 'Mumbai',
-              to: 'Delhi',
-              departure: '14:00',
-              arrival: '02:00',
-              duration: '12h 00m',
-              price: 2500,
-              bus: 'SmartBus Pro SB-001',
-              features: ['WiFi', 'AC', 'USB Ports', 'Entertainment']
-            },
-            {
-              id: 3,
-              from: 'Bangalore',
-              to: 'Chennai',
-              departure: '09:00',
-              arrival: '15:00',
-              duration: '6h 00m',
-              price: 1200,
-              bus: 'SmartBus Elite SB-002',
-              features: ['WiFi', 'AC', 'USB Ports', 'Entertainment', 'Premium Seats']
-            },
-            {
-              id: 4,
-              from: 'Delhi',
-              to: 'Jaipur',
-              departure: '07:00',
-              arrival: '12:00',
-              duration: '5h 00m',
-              price: 800,
-              bus: 'SmartBus Express SB-003',
-              features: ['WiFi', 'AC', 'USB Ports']
-            },
-            {
-              id: 5,
-              from: 'Kolkata',
-              to: 'Hyderabad',
-              departure: '10:00',
-              arrival: '22:00',
-              duration: '12h 00m',
-              price: 1800,
-              bus: 'SmartBus Premium SB-004',
-              features: ['WiFi', 'AC', 'USB Ports', 'Entertainment', 'Meals']
-            }
-          ].map((route) => (
-            <div key={route.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+          {buses.slice(0, 5).map((bus) => (
+            <div key={bus.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <div className="flex items-center space-x-4 mb-2">
                     <h3 className="text-lg font-semibold">
-                      {route.from} → {route.to}
+                      {bus.route}
                     </h3>
                     <span className="sensor-indicator sensor-good">
-                      {route.bus}
+                      {bus.busName}
                     </span>
                   </div>
                   
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                     <div className="flex items-center space-x-2">
                       <ClockIcon className="h-4 w-4" />
-                      <span>{route.departure} - {route.arrival}</span>
+                      <span>08:00 - 20:00</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <CalendarIcon className="h-4 w-4" />
-                      <span>{route.duration}</span>
+                      <span>12h 00m</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <CurrencyDollarIcon className="h-4 w-4" />
-                      <span className="font-semibold text-green-600">₹{route.price}</span>
+                      <span className="font-semibold text-green-600">₹{bus.price}</span>
                     </div>
                     <div className="flex flex-wrap gap-1">
-                      {route.features.map((feature, index) => (
+                      {['WiFi', 'AC', 'USB Ports', 'Entertainment'].map((feature, index) => (
                         <span key={index} className="text-xs bg-blue-100 text-black px-2 py-1 rounded">
                           {feature}
                         </span>

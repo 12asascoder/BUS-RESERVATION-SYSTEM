@@ -29,32 +29,43 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({ children }
   const [isConnected, setIsConnected] = useState(false)
 
   useEffect(() => {
-    // Skip WebSocket connection for now to avoid blocking app rendering
-    setIsConnected(false)
-    console.log('WebSocket disabled for demo mode')
-    
-    // Original WebSocket code commented out to prevent app crashes
-    /*
-    const socket = new SockJS('http://localhost:8080/ws/iot')
-    const stomp = Stomp.over(socket)
-    
-    stomp.debug = false
-    
-    stomp.connect({}, () => {
-      setIsConnected(true)
-      setStompClient(stomp)
-      console.log('WebSocket connected')
-    }, (error: any) => {
-      console.error('WebSocket connection error:', error)
-      setIsConnected(false)
-    })
+    // Try to connect to WebSocket, but don't block the app if it fails
+    const connectWebSocket = async () => {
+      try {
+        const socket = new SockJS('http://localhost:8080/ws/iot')
+        const stomp = Stomp.over(socket)
+        
+        stomp.debug = false
+        
+        // Set a timeout for connection
+        const connectionTimeout = setTimeout(() => {
+          console.log('WebSocket connection timeout - using demo mode')
+          setIsConnected(false)
+        }, 3000)
+        
+        stomp.connect({}, () => {
+          clearTimeout(connectionTimeout)
+          setIsConnected(true)
+          setStompClient(stomp)
+          console.log('WebSocket connected successfully')
+        }, (error: any) => {
+          clearTimeout(connectionTimeout)
+          console.log('WebSocket connection failed - using demo mode:', error)
+          setIsConnected(false)
+        })
+      } catch (error) {
+        console.log('WebSocket initialization failed - using demo mode:', error)
+        setIsConnected(false)
+      }
+    }
+
+    connectWebSocket()
 
     return () => {
       if (stompClient) {
         stompClient.disconnect()
       }
     }
-    */
   }, [])
 
   const subscribeToIoT = (callback: (data: any) => void) => {

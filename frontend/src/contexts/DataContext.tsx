@@ -10,6 +10,8 @@ export interface Bus {
   capacity: number
   category: string
   currentRoute: string
+  route?: string
+  price?: number
   occupancy: number
   status: 'active' | 'maintenance' | 'idle'
   temperature?: number
@@ -122,6 +124,8 @@ export interface SystemStats {
   totalRevenue: number
   energyEfficiency: number
   greenScore: number
+  totalBookings: number
+  lastUpdate: string
 }
 
 interface DataContextType {
@@ -184,24 +188,26 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const { subscribeToIoT, subscribeToRFID, isConnected } = useWebSocket()
   
   // Initialize with comprehensive bus data - at least 10 buses per route
-  const [buses, setBuses] = useState<Bus[]>(() => [
-    // Mumbai → Delhi Route (10+ buses)
-    {
-      id: 1,
-      busNumber: 'SB-001',
-      busName: 'SmartBus Pro',
-      model: 'Volvo B11R',
-      capacity: 50,
-      category: 'Premium',
-      currentRoute: 'Mumbai → Delhi',
-      occupancy: 45,
-      status: 'active',
-      temperature: 24.5,
-      humidity: 45,
-      vibration: 0.2,
-      fuelLevel: 85,
-      lastUpdate: new Date().toISOString()
-    },
+  const [buses, setBuses] = useState<Bus[]>([
+      // Mumbai → Delhi Route (10+ buses)
+      {
+        id: 1,
+        busNumber: 'SB-001',
+        busName: 'SmartBus Pro',
+        model: 'Volvo B11R',
+        capacity: 50,
+        category: 'Premium',
+        currentRoute: 'Mumbai → Delhi',
+        route: 'Mumbai → Delhi',
+        price: 3000,
+        occupancy: 45,
+        status: 'active' as const,
+        temperature: 24.5,
+        humidity: 45,
+        vibration: 0.2,
+        fuelLevel: 85,
+        lastUpdate: new Date().toISOString()
+      },
     {
       id: 2,
       busNumber: 'SB-002',
@@ -1767,13 +1773,15 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   ])
   
   const [systemStats, setSystemStats] = useState<SystemStats>({
-    totalBuses: 10,
+    totalBuses: 90,
     activeRoutes: 8,
     todayPassengers: 1247,
     iotSensors: 500,
     totalRevenue: 2500000,
     energyEfficiency: 91.2,
-    greenScore: 94.5
+    greenScore: 94.5,
+    totalBookings: 1247,
+    lastUpdate: new Date().toISOString()
   })
   const [lastUpdate, setLastUpdate] = useState<string>(new Date().toISOString())
 
@@ -1990,13 +1998,40 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     setLastUpdate(new Date().toISOString())
   }
 
-  // Simulate real-time data updates
+  // Enhanced real-time data updates with better synchronization
   useEffect(() => {
     const interval = setInterval(() => {
-      // Simulate IoT data updates
+      const now = new Date().toISOString()
+      
+      // Update bus occupancy and status with realistic patterns
+      setBuses(prevBuses => prevBuses.map(bus => {
+        if (bus.status === 'active') {
+          // More realistic occupancy changes based on time
+          const hour = new Date().getHours()
+          const isPeakHour = (hour >= 7 && hour <= 9) || (hour >= 17 && hour <= 19)
+          const occupancyChange = isPeakHour ? 
+            Math.floor(Math.random() * 2) : // Peak: 0-1 increase
+            Math.floor(Math.random() * 3) - 1 // Off-peak: -1, 0, or 1
+          
+          const newOccupancy = Math.max(0, Math.min(bus.capacity, bus.occupancy + occupancyChange))
+          
+          return {
+            ...bus,
+            occupancy: newOccupancy,
+            lastUpdate: now,
+            temperature: 20 + Math.random() * 15,
+            humidity: 35 + Math.random() * 20,
+            vibration: Math.random() * 0.5,
+            fuelLevel: Math.max(10, bus.fuelLevel ? bus.fuelLevel - Math.random() * 0.1 : 85)
+          }
+        }
+        return bus
+      }))
+      
+      // Simulate IoT data updates for active buses
       buses.forEach(bus => {
         if (bus.status === 'active') {
-          const temperature = 20 + Math.random() * 10
+          const temperature = 20 + Math.random() * 15
           const humidity = 35 + Math.random() * 20
           const vibration = Math.random() * 0.5
           
@@ -2006,37 +2041,47 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
             humidity,
             vibration,
             seatPressure: Array.from({ length: bus.capacity }, () => Math.random()),
-            timestamp: new Date().toISOString()
+            timestamp: now
           })
         }
       })
       
-      // Simulate occasional RFID events
-      if (Math.random() < 0.1) { // 10% chance every interval
-        const randomBus = buses[Math.floor(Math.random() * buses.length)]
-        if (randomBus.status === 'active') {
+      // Enhanced RFID event simulation
+      if (Math.random() < 0.15) { // 15% chance every interval
+        const activeBuses = buses.filter(bus => bus.status === 'active')
+        if (activeBuses.length > 0) {
+          const randomBus = activeBuses[Math.floor(Math.random() * activeBuses.length)]
+          const eventTypes = ['BOARDING', 'SCAN_FAILED', 'CAPACITY_EXCEEDED']
+          const eventType = eventTypes[Math.floor(Math.random() * eventTypes.length)]
+          
           addRFIDEvent({
-            id: Date.now().toString(),
+            id: `EVT_${Date.now()}`,
             busId: randomBus.id,
             rfidReaderId: `READER_${randomBus.id}_${Math.floor(Math.random() * 3) + 1}`,
             ticketId: `TICKET_${Math.floor(Math.random() * 10000)}`,
             passengerId: Math.floor(Math.random() * 1000),
-            eventType: Math.random() > 0.2 ? 'BOARDING' : 'SCAN_FAILED',
-            eventTime: new Date().toISOString(),
+            eventType,
+            eventTime: now,
             location: `boarding_gate_${randomBus.id}`,
-            success: Math.random() > 0.2
+            success: eventType === 'BOARDING'
           })
         }
       }
       
-      // Update energy efficiency and green score
+      // Update system statistics with realistic patterns
       setSystemStats(prev => ({
         ...prev,
-        energyEfficiency: Math.min(95, prev.energyEfficiency + (Math.random() - 0.5) * 0.5),
-        greenScore: Math.min(98, prev.greenScore + (Math.random() - 0.5) * 0.3)
+        energyEfficiency: Math.min(95, Math.max(75, prev.energyEfficiency + (Math.random() - 0.5) * 0.5)),
+        greenScore: Math.min(98, Math.max(80, prev.greenScore + (Math.random() - 0.5) * 0.3)),
+        totalBookings: prev.totalBookings + (Math.random() < 0.1 ? 1 : 0),
+        activeRoutes: buses.filter(bus => bus.status === 'active').length,
+        lastUpdate: now
       }))
       
-    }, 5000) // Update every 5 seconds
+      // Update global timestamp for synchronization
+      setLastUpdate(now)
+      
+    }, 3000) // Update every 3 seconds for more responsive updates
 
     return () => clearInterval(interval)
   }, [buses])

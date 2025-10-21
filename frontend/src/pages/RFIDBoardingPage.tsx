@@ -296,8 +296,8 @@ const RFIDBoardingPage: React.FC = () => {
                   <ExclamationTriangleIcon className="h-4 w-4 text-red-600" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-black">Passengers Not Boarded</p>
-                  <p className="text-xs text-black">
+                  <p className="text-sm font-medium" style={{color: '#000000'}}>Passengers Not Boarded</p>
+                  <p className="text-xs" style={{color: '#000000'}}>
                     {boardingStatus.missedPassengers} passengers haven't boarded yet
                   </p>
                 </div>
@@ -337,8 +337,8 @@ const RFIDBoardingPage: React.FC = () => {
                 <CheckCircleIcon className="h-4 w-4 text-green-600" />
               </div>
               <div>
-                <p className="text-sm font-medium text-black">RFID System Online</p>
-                <p className="text-xs text-black">
+                <p className="text-sm font-medium" style={{color: '#000000'}}>RFID System Online</p>
+                <p className="text-xs" style={{color: '#000000'}}>
                   All RFID readers are functioning normally
                 </p>
               </div>
