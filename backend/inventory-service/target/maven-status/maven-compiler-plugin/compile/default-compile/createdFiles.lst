@@ -1,0 +1,12 @@
+com/smartbus2plus/inventory/repository/ScheduleRepository.class
+com/smartbus2plus/inventory/repository/BusRepository.class
+com/smartbus2plus/inventory/repository/SeatConfigurationRepository.class
+com/smartbus2plus/inventory/model/Route.class
+com/smartbus2plus/inventory/model/SeatConfiguration$HealthStatus.class
+com/smartbus2plus/inventory/controller/InventoryController.class
+com/smartbus2plus/inventory/model/Schedule.class
+com/smartbus2plus/inventory/InventoryServiceApplication.class
+com/smartbus2plus/inventory/model/Bus.class
+com/smartbus2plus/inventory/model/SeatConfiguration$SeatType.class
+com/smartbus2plus/inventory/model/SeatConfiguration.class
+com/smartbus2plus/inventory/service/InventoryService.class

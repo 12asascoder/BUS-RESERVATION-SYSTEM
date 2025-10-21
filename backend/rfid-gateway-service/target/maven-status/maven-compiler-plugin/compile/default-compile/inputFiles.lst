@@ -1,0 +1,8 @@
+/Users/arnav/Code/APP_RA7/backend/rfid-gateway-service/src/main/java/com/smartbus2plus/rfid/model/RFIDEvent.java
+/Users/arnav/Code/APP_RA7/backend/rfid-gateway-service/src/main/java/com/smartbus2plus/rfid/repository/RFIDEventRepository.java
+/Users/arnav/Code/APP_RA7/backend/rfid-gateway-service/src/main/java/com/smartbus2plus/rfid/RFIDGatewayServiceApplication.java
+/Users/arnav/Code/APP_RA7/backend/rfid-gateway-service/src/main/java/com/smartbus2plus/rfid/config/KafkaConfig.java
+/Users/arnav/Code/APP_RA7/backend/rfid-gateway-service/src/main/java/com/smartbus2plus/rfid/controller/RFIDGatewayController.java
+/Users/arnav/Code/APP_RA7/backend/rfid-gateway-service/src/main/java/com/smartbus2plus/rfid/dto/RFIDDto.java
+/Users/arnav/Code/APP_RA7/backend/rfid-gateway-service/src/main/java/com/smartbus2plus/rfid/service/RFIDGatewayService.java
+/Users/arnav/Code/APP_RA7/backend/rfid-gateway-service/src/main/java/com/smartbus2plus/rfid/config/WebSocketConfig.java

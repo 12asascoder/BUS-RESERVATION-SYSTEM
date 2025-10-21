@@ -1,0 +1,7 @@
+com/smartbus2plus/ai/config/WebSocketConfig.class
+com/smartbus2plus/ai/repository/AIRecommendationRepository.class
+com/smartbus2plus/ai/model/AIRecommendation.class
+com/smartbus2plus/ai/AIAssistServiceApplication.class
+com/smartbus2plus/ai/controller/AIAssistController.class
+com/smartbus2plus/ai/config/KafkaConfig.class
+com/smartbus2plus/ai/service/AIAssistService.class

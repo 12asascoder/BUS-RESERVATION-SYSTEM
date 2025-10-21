@@ -1,0 +1,6 @@
+com/smartbus2plus/analytics/controller/AnalyticsController.class
+com/smartbus2plus/analytics/repository/EnergyAnalyticsRepository.class
+com/smartbus2plus/analytics/AnalyticsServiceApplication.class
+com/smartbus2plus/analytics/model/EnergyAnalytics.class
+com/smartbus2plus/analytics/config/KafkaConfig.class
+com/smartbus2plus/analytics/service/AnalyticsService.class

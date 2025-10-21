@@ -1,0 +1,7 @@
+/Users/arnav/Code/APP_RA7/backend/ai-assist-service/src/main/java/com/smartbus2plus/ai/controller/AIAssistController.java
+/Users/arnav/Code/APP_RA7/backend/ai-assist-service/src/main/java/com/smartbus2plus/ai/service/AIAssistService.java
+/Users/arnav/Code/APP_RA7/backend/ai-assist-service/src/main/java/com/smartbus2plus/ai/model/AIRecommendation.java
+/Users/arnav/Code/APP_RA7/backend/ai-assist-service/src/main/java/com/smartbus2plus/ai/config/KafkaConfig.java
+/Users/arnav/Code/APP_RA7/backend/ai-assist-service/src/main/java/com/smartbus2plus/ai/repository/AIRecommendationRepository.java
+/Users/arnav/Code/APP_RA7/backend/ai-assist-service/src/main/java/com/smartbus2plus/ai/config/WebSocketConfig.java
+/Users/arnav/Code/APP_RA7/backend/ai-assist-service/src/main/java/com/smartbus2plus/ai/AIAssistServiceApplication.java

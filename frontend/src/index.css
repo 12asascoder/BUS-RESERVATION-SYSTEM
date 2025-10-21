@@ -1,0 +1,440 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables for Cosmos Design System */
+:root {
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --secondary-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --success-gradient: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --danger-gradient: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+  --dark-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #000000;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 160px 30px, #ddd, transparent),
+    radial-gradient(1px 1px at 200px 60px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 240px 20px, #fff, transparent),
+    radial-gradient(2px 2px at 280px 70px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 320px 40px, #eee, transparent),
+    radial-gradient(1px 1px at 360px 80px, rgba(255,255,255,0.5), transparent);
+  background-repeat: repeat;
+  background-size: 400px 100px;
+  min-height: 100vh;
+  color: #ffffff;
+  position: relative;
+}
+
+/* Glass Morphism Components */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+/* Text Visibility Enhancements */
+.text-white {
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.text-gray-300 {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.text-gray-400 {
+  color: #ffffff !important;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+}
+
+.text-gray-200 {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Purple Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #8b5cf6 !important;
+  text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.3));
+}
+
+.glass-card {
+  @apply glass p-6 shadow-xl;
+}
+
+.glass-button {
+  @apply glass px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-secondary {
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient Buttons */
+.btn-primary {
+  background: var(--primary-gradient);
+  @apply text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.btn-secondary {
+  background: var(--secondary-gradient);
+  @apply text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.btn-success {
+  background: var(--success-gradient);
+  @apply text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.btn-warning {
+  background: var(--warning-gradient);
+  @apply text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.btn-danger {
+  background: var(--danger-gradient);
+  @apply text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+/* Cosmos Background */
+.animated-bg {
+  background: #000000;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 160px 30px, #ddd, transparent),
+    radial-gradient(1px 1px at 200px 60px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 240px 20px, #fff, transparent),
+    radial-gradient(2px 2px at 280px 70px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 320px 40px, #eee, transparent),
+    radial-gradient(1px 1px at 360px 80px, rgba(255,255,255,0.5), transparent);
+  background-repeat: repeat;
+  background-size: 400px 100px;
+  position: relative;
+}
+
+
+/* Floating Animation */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Pulse Animation */
+.pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-gradient);
+}
+
+/* Form Styles */
+.form-input {
+  @apply w-full px-4 py-3 rounded-lg border-2 border-transparent bg-white/20 backdrop-blur-sm text-black placeholder-gray-500 focus:outline-none focus:border-blue-400 focus:bg-white/30 transition-all duration-300;
+  color: #000000 !important;
+}
+
+.form-input::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Enhanced Readability Styles - All text white */
+.text-readable {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3) !important;
+}
+
+.text-readable-white {
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+}
+
+.text-readable-gray {
+  color: #ffffff !important;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Form elements text color based on background */
+input, select, textarea {
+  color: #000000 !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+/* White input boxes should have black text */
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="tel"], 
+input[type="number"], 
+input[type="date"], 
+select, 
+textarea {
+  color: #000000 !important;
+}
+
+input[type="text"]::placeholder, 
+input[type="email"]::placeholder, 
+input[type="password"]::placeholder, 
+input[type="tel"]::placeholder, 
+input[type="number"]::placeholder, 
+input[type="date"]::placeholder, 
+textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Card content readability - all white text */
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
+  color: #8b5cf6 !important;
+  text-shadow: 0 0 15px rgba(139, 92, 246, 0.5) !important;
+}
+
+.card p, .card span, .card div {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* White background sections should have black text for contrast */
+.bg-white, .bg-gray-50, .bg-gray-100 {
+  color: #000000 !important;
+}
+
+.bg-white h1, .bg-white h2, .bg-white h3, .bg-white h4, .bg-white h5, .bg-white h6,
+.bg-gray-50 h1, .bg-gray-50 h2, .bg-gray-50 h3, .bg-gray-50 h4, .bg-gray-50 h5, .bg-gray-50 h6,
+.bg-gray-100 h1, .bg-gray-100 h2, .bg-gray-100 h3, .bg-gray-100 h4, .bg-gray-100 h5, .bg-gray-100 h6 {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+.bg-white p, .bg-white span, .bg-white div,
+.bg-gray-50 p, .bg-gray-50 span, .bg-gray-50 div,
+.bg-gray-100 p, .bg-gray-100 span, .bg-gray-100 div {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+/* Override all text colors to white for dark theme */
+p, span, div, label, small {
+  color: #ffffff !important;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Specific overrides for better readability */
+.text-gray-600, .text-gray-500, .text-gray-400, .text-gray-300, .text-gray-200 {
+  color: #ffffff !important;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.2) !important;
+}
+
+.form-label {
+  @apply block text-sm font-semibold text-gray-700 mb-2;
+}
+
+/* Card Styles */
+.card {
+  @apply glass-card hover:shadow-2xl transition-all duration-300 hover:scale-105;
+}
+
+.card-header {
+  @apply text-xl font-bold gradient-text mb-4;
+}
+
+/* Status Indicators */
+.status-online {
+  @apply w-3 h-3 bg-green-400 rounded-full animate-pulse;
+}
+
+.status-offline {
+  @apply w-3 h-3 bg-red-400 rounded-full;
+}
+
+.status-warning {
+  @apply w-3 h-3 bg-yellow-400 rounded-full animate-pulse;
+}
+
+/* Loading Spinner */
+.spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .glass-card {
+    @apply p-4;
+  }
+  
+  .btn-primary, .btn-secondary, .btn-success, .btn-warning, .btn-danger {
+    @apply px-4 py-2 text-sm;
+  }
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-lg border border-gray-200 p-6;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black;
+    color: #000000 !important;
+  }
+  
+  .input-field::placeholder {
+    color: #6b7280 !important;
+  }
+  
+  .seat-available {
+    @apply bg-green-100 border-green-300 text-green-800 hover:bg-green-200;
+  }
+  
+  .seat-occupied {
+    @apply bg-red-100 border-red-300 text-red-800 cursor-not-allowed;
+  }
+  
+  .seat-selected {
+    @apply bg-blue-100 border-blue-300 text-blue-800;
+  }
+  
+  .seat-maintenance {
+    @apply bg-yellow-100 border-yellow-300 text-yellow-800 cursor-not-allowed;
+  }
+  
+  .sensor-indicator {
+    @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .sensor-good {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .sensor-warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .sensor-danger {
+    @apply bg-red-100 text-red-800;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+  }
+  
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+/* Global rules for all white input boxes to have black text */
+input[style*="background-color: white"],
+input[style*="background: white"],
+input[style*="background-color: #fff"],
+input[style*="background: #fff"],
+input[style*="background-color: #ffffff"],
+input[style*="background: #ffffff"],
+.bg-white input,
+.bg-gray-50 input,
+.bg-gray-100 input,
+input.bg-white,
+input.bg-gray-50,
+input.bg-gray-100 {
+  color: #000000 !important;
+}
+
+input[style*="background-color: white"]::placeholder,
+input[style*="background: white"]::placeholder,
+input[style*="background-color: #fff"]::placeholder,
+input[style*="background: #fff"]::placeholder,
+input[style*="background-color: #ffffff"]::placeholder,
+input[style*="background: #ffffff"]::placeholder,
+.bg-white input::placeholder,
+.bg-gray-50 input::placeholder,
+.bg-gray-100 input::placeholder,
+input.bg-white::placeholder,
+input.bg-gray-50::placeholder,
+input.bg-gray-100::placeholder {
+  color: #6b7280 !important;
+}

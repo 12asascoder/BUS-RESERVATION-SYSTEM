@@ -1,0 +1,11 @@
+com/smartbus2plus/iot/IoTTelemetryServiceApplication.class
+com/smartbus2plus/iot/config/KafkaConfig.class
+com/smartbus2plus/iot/config/WebSocketConfig.class
+com/smartbus2plus/iot/dto/IoTDto$SeatOccupancyData.class
+com/smartbus2plus/iot/dto/IoTDto$BusEnvironmentData.class
+com/smartbus2plus/iot/dto/IoTDto$TelemetryData.class
+com/smartbus2plus/iot/repository/IoTTelemetryRepository.class
+com/smartbus2plus/iot/service/IoTTelemetryService.class
+com/smartbus2plus/iot/dto/IoTDto.class
+com/smartbus2plus/iot/controller/IoTTelemetryController.class
+com/smartbus2plus/iot/model/IoTTelemetry.class

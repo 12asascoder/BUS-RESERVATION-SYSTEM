@@ -1,0 +1,10 @@
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/repository/SeatConfigurationRepository.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/model/Schedule.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/model/Bus.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/model/SeatConfiguration.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/model/Route.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/InventoryServiceApplication.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/repository/BusRepository.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/service/InventoryService.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/repository/ScheduleRepository.java
+/Users/arnav/Code/APP_RA7/backend/inventory-service/src/main/java/com/smartbus2plus/inventory/controller/InventoryController.java

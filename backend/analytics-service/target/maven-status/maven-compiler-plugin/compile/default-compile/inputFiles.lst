@@ -1,0 +1,6 @@
+/Users/arnav/Code/APP_RA7/backend/analytics-service/src/main/java/com/smartbus2plus/analytics/repository/EnergyAnalyticsRepository.java
+/Users/arnav/Code/APP_RA7/backend/analytics-service/src/main/java/com/smartbus2plus/analytics/AnalyticsServiceApplication.java
+/Users/arnav/Code/APP_RA7/backend/analytics-service/src/main/java/com/smartbus2plus/analytics/service/AnalyticsService.java
+/Users/arnav/Code/APP_RA7/backend/analytics-service/src/main/java/com/smartbus2plus/analytics/controller/AnalyticsController.java
+/Users/arnav/Code/APP_RA7/backend/analytics-service/src/main/java/com/smartbus2plus/analytics/model/EnergyAnalytics.java
+/Users/arnav/Code/APP_RA7/backend/analytics-service/src/main/java/com/smartbus2plus/analytics/config/KafkaConfig.java

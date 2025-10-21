@@ -1,0 +1,226 @@
+version: '3.8'
+
+services:
+  # Database Services
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: bus_reservation
+      POSTGRES_USER: bus_user
+      POSTGRES_PASSWORD: bus_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - bus-network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - bus-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    networks:
+      - bus-network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - bus-network
+
+  # API Gateway
+  api-gateway:
+    build: ./backend/api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+    depends_on:
+      - eureka
+      - postgres
+      - redis
+      - kafka
+    networks:
+      - bus-network
+
+  # Service Discovery
+  eureka:
+    build: ./backend/eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - bus-network
+
+  # Microservices
+  auth-service:
+    build: ./backend/auth-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bus_reservation
+      - SPRING_DATASOURCE_USERNAME=bus_user
+      - SPRING_DATASOURCE_PASSWORD=bus_password
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    depends_on:
+      - eureka
+      - postgres
+      - redis
+    networks:
+      - bus-network
+
+  inventory-service:
+    build: ./backend/inventory-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bus_reservation
+      - SPRING_DATASOURCE_USERNAME=bus_user
+      - SPRING_DATASOURCE_PASSWORD=bus_password
+    depends_on:
+      - eureka
+      - postgres
+    networks:
+      - bus-network
+
+  booking-service:
+    build: ./backend/booking-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bus_reservation
+      - SPRING_DATASOURCE_USERNAME=bus_user
+      - SPRING_DATASOURCE_PASSWORD=bus_password
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - eureka
+      - postgres
+      - redis
+      - kafka
+    networks:
+      - bus-network
+
+  payment-service:
+    build: ./backend/payment-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bus_reservation
+      - SPRING_DATASOURCE_USERNAME=bus_user
+      - SPRING_DATASOURCE_PASSWORD=bus_password
+    depends_on:
+      - eureka
+      - postgres
+    networks:
+      - bus-network
+
+  iot-telemetry-service:
+    build: ./backend/iot-telemetry-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bus_reservation
+      - SPRING_DATASOURCE_USERNAME=bus_user
+      - SPRING_DATASOURCE_PASSWORD=bus_password
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - eureka
+      - postgres
+      - kafka
+    networks:
+      - bus-network
+
+  rfid-gateway-service:
+    build: ./backend/rfid-gateway-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bus_reservation
+      - SPRING_DATASOURCE_USERNAME=bus_user
+      - SPRING_DATASOURCE_PASSWORD=bus_password
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - eureka
+      - postgres
+      - kafka
+    networks:
+      - bus-network
+
+  ai-assist-service:
+    build: ./backend/ai-assist-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bus_reservation
+      - SPRING_DATASOURCE_USERNAME=bus_user
+      - SPRING_DATASOURCE_PASSWORD=bus_password
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - eureka
+      - postgres
+      - kafka
+    networks:
+      - bus-network
+
+  analytics-service:
+    build: ./backend/analytics-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/bus_reservation
+      - SPRING_DATASOURCE_USERNAME=bus_user
+      - SPRING_DATASOURCE_PASSWORD=bus_password
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    depends_on:
+      - eureka
+      - postgres
+      - kafka
+    networks:
+      - bus-network
+
+  # Frontend
+  frontend:
+    build: ./frontend
+    ports:
+      - "3001:4173"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+    depends_on:
+      - api-gateway
+    networks:
+      - bus-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  bus-network:
+    driver: bridge

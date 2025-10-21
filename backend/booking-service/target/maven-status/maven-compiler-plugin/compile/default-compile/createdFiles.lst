@@ -1,0 +1,8 @@
+com/smartbus2plus/booking/model/Booking$BoardingStatus.class
+com/smartbus2plus/booking/service/BookingService.class
+com/smartbus2plus/booking/repository/BookingRepository.class
+com/smartbus2plus/booking/config/RedisConfig.class
+com/smartbus2plus/booking/controller/BookingController.class
+com/smartbus2plus/booking/model/Booking.class
+com/smartbus2plus/booking/BookingServiceApplication.class
+com/smartbus2plus/booking/model/Booking$BookingStatus.class

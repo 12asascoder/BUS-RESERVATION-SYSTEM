@@ -1,0 +1,13 @@
+com/smartbus2plus/rfid/dto/RFIDDto$RFIDScanResponse.class
+com/smartbus2plus/rfid/controller/RFIDGatewayController.class
+com/smartbus2plus/rfid/RFIDGatewayServiceApplication.class
+com/smartbus2plus/rfid/dto/RFIDDto$PassengerAlert.class
+com/smartbus2plus/rfid/dto/RFIDDto.class
+com/smartbus2plus/rfid/dto/RFIDDto$BoardingStatus.class
+com/smartbus2plus/rfid/config/KafkaConfig.class
+com/smartbus2plus/rfid/service/RFIDGatewayService.class
+com/smartbus2plus/rfid/dto/RFIDDto$RFIDScanRequest.class
+com/smartbus2plus/rfid/repository/RFIDEventRepository.class
+com/smartbus2plus/rfid/config/WebSocketConfig.class
+com/smartbus2plus/rfid/model/RFIDEvent$EventType.class
+com/smartbus2plus/rfid/model/RFIDEvent.class
