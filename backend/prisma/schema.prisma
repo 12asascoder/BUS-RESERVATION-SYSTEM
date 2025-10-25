@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  phone     String
+  role      String   @default("passenger") // passenger, admin
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings Booking[]
+
+  @@map("users")
+}
+
+model Bus {
+  id            String   @id @default(cuid())
+  name          String
+  operator      String
+  from          String
+  to            String
+  price         Float
+  departureTime String
+  arrivalTime   String
+  capacity      Int
+  type          String   // AC Sleeper, AC Seater, Non-AC Sleeper, Non-AC Seater
+  rating        Float    @default(4.0)
+  status        String   @default("active") // active, inactive, maintenance
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  bookings Booking[]
+
+  @@map("buses")
+}
+
+model Booking {
+  id             String   @id @default(cuid())
+  userId         String
+  busId          String
+  seats          String[] // Array of seat numbers like ["1A", "2B"]
+  passengerName  String
+  passengerEmail String
+  passengerPhone String
+  totalPrice     Float
+  status         String   @default("confirmed") // confirmed, cancelled, completed
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bus  Bus  @relation(fields: [busId], references: [id], onDelete: Cascade)
+
+  @@map("bookings")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  busId     String
+  rating    Int      // 1-5 stars
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reviews")
+}
+
+model Route {
+  id          String   @id @default(cuid())
+  name        String
+  from        String
+  to          String
+  distance    Float    // in kilometers
+  duration    Int      // in minutes
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("routes")
+}
+
+model Stop {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("stops")
+}

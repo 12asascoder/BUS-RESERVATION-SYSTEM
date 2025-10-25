@@ -1,159 +1,119 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import axios from 'axios'
-import toast from 'react-hot-toast'
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
-  id: number
-  username: string
-  email: string
-  firstName: string
-  lastName: string
-  role: string
+  id: string;
+  email: string;
+  name: string;
+  role: 'passenger' | 'admin';
 }
 
 interface AuthContextType {
-  user: User | null
-  token: string | null
-  login: (username: string, password: string) => Promise<boolean>
-  register: (userData: RegisterData) => Promise<boolean>
-  logout: () => void
-  isLoading: boolean
+  user: User | null;
+  token: string | null;
+  login: (email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, phone: string, password: string) => Promise<void>;
+  logout: () => void;
+  loading: boolean;
 }
 
-interface RegisterData {
-  username: string
-  email: string
-  password: string
-  firstName: string
-  lastName: string
-  phone?: string
-}
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 export const useAuth = () => {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider')
+    throw new Error('useAuth must be used within an AuthProvider');
   }
-  return context
-}
+  return context;
+};
 
 interface AuthProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null)
-  const [token, setToken] = useState<string | null>(localStorage.getItem('token'))
-  const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Skip token validation for now to avoid API issues
-    setIsLoading(false)
-  }, [token])
+    // Check for existing token and user data
+    const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
+    
+    if (storedToken && storedUser) {
+      setToken(storedToken);
+      setUser(JSON.parse(storedUser));
+    }
+    
+    setLoading(false);
+  }, []);
 
-  const validateToken = async () => {
+  const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post('/api/auth/validate', {}, {
-        headers: { Authorization: `Bearer ${token}` },
-        timeout: 5000
-      })
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      const { token: newToken, user: userData } = data;
       
-      if (response.data) {
-        // Token is valid, get user info
-        const userResponse = await axios.get(`/api/auth/user/${localStorage.getItem('username')}`, {
-          headers: { Authorization: `Bearer ${token}` },
-          timeout: 5000
-        })
-        setUser(userResponse.data)
-      }
-    } catch (error: any) {
-      console.error('Token validation failed:', error)
-      // Don't automatically logout on network errors
-      if (error.code === 'ECONNREFUSED' || error.code === 'NETWORK_ERROR') {
-        console.log('Backend not available, skipping token validation')
-      } else {
-        logout()
-      }
-    } finally {
-      setIsLoading(false)
+      setToken(newToken);
+      setUser(userData);
+      
+      localStorage.setItem('token', newToken);
+      localStorage.setItem('user', JSON.stringify(userData));
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
     }
-  }
+  };
 
-  const login = async (username: string, password: string): Promise<boolean> => {
+  const register = async (name: string, email: string, phone: string, password: string) => {
     try {
-      // Simple local authentication for demo
-      if (username && password) {
-        const demoUser = {
-          id: 1,
-          username: username,
-          email: `${username}@smartbus2plus.com`,
-          firstName: username === 'admin' ? 'Admin' : 'User',
-          lastName: 'SmartBus',
-          role: username === 'admin' ? 'admin' : 'passenger'
-        }
-        
-        const demoToken = 'smartbus-token-' + Date.now()
-        
-        setToken(demoToken)
-        setUser(demoUser)
-        localStorage.setItem('token', demoToken)
-        localStorage.setItem('username', username)
-        
-        toast.success(`Welcome back, ${demoUser.firstName}!`)
-        return true
-      } else {
-        toast.error('Please enter both username and password')
-        return false
-      }
-    } catch (error: any) {
-      console.error('Login error:', error)
-      toast.error('Login failed')
-      return false
-    }
-  }
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, phone, password }),
+      });
 
-  const register = async (userData: RegisterData): Promise<boolean> => {
-    try {
-      // Simple local registration for demo
-      if (userData.username && userData.password && userData.email) {
-        const newUser = {
-          id: Date.now(),
-          username: userData.username,
-          email: userData.email,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          role: 'passenger'
-        }
-        
-        const demoToken = 'smartbus-token-' + Date.now()
-        
-        setToken(demoToken)
-        setUser(newUser)
-        localStorage.setItem('token', demoToken)
-        localStorage.setItem('username', userData.username)
-        
-        toast.success(`Welcome to SmartBus2+, ${newUser.firstName}!`)
-        return true
-      } else {
-        toast.error('Please fill in all required fields')
-        return false
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Registration failed');
       }
-    } catch (error: any) {
-      console.error('Registration error:', error)
-      toast.error('Registration failed')
-      return false
+
+      const { token: newToken, user: userData } = data;
+      
+      setToken(newToken);
+      setUser(userData);
+      
+      localStorage.setItem('token', newToken);
+      localStorage.setItem('user', JSON.stringify(userData));
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error;
     }
-  }
+  };
 
   const logout = () => {
-    setUser(null)
-    setToken(null)
-    localStorage.removeItem('token')
-    localStorage.removeItem('username')
-    toast.success('Logged out successfully')
-  }
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  };
 
   const value: AuthContextType = {
     user,
@@ -161,12 +121,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     register,
     logout,
-    isLoading
-  }
+    loading,
+  };
 
   return (
     <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
