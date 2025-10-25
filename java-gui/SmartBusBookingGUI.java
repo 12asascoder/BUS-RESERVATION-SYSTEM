@@ -3,11 +3,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SmartBusBookingGUI extends JFrame {
-    private JPanel mainPanel;
     private JComboBox<String> fromComboBox;
     private JComboBox<String> toComboBox;
     private JTextField dateField;
@@ -17,7 +14,6 @@ public class SmartBusBookingGUI extends JFrame {
     private JTextField passengerEmailField;
     private JTextField passengerPhoneField;
     private JLabel totalPriceLabel;
-    private List<String> selectedSeats = new ArrayList<>();
     
     public SmartBusBookingGUI() {
         initializeGUI();
@@ -30,7 +26,7 @@ public class SmartBusBookingGUI extends JFrame {
         setSize(1000, 700);
         setLocationRelativeTo(null);
         
-        mainPanel = new JPanel(new BorderLayout(10, 10));
+        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         
         // Header
@@ -64,7 +60,7 @@ public class SmartBusBookingGUI extends JFrame {
         panel.setBorder(BorderFactory.createTitledBorder("Search & Select Bus"));
         
         // Search section
-        JPanel searchPanel = new JPanel(new GridLayout(3, 2, 5, 5));
+        JPanel searchPanel = new JPanel(new GridLayout(4, 2, 5, 5));
         
         searchPanel.add(new JLabel("From:"));
         fromComboBox = new JComboBox<>(new String[]{
@@ -154,7 +150,7 @@ public class SmartBusBookingGUI extends JFrame {
         
         JPanel pricePanel = new JPanel(new FlowLayout());
         pricePanel.add(new JLabel("Total Price:"));
-        totalPriceLabel = new JLabel("₹0");
+        totalPriceLabel = new JLabel("₹3000");
         totalPriceLabel.setFont(new Font("Arial", Font.BOLD, 16));
         totalPriceLabel.setForeground(new Color(34, 197, 94));
         pricePanel.add(totalPriceLabel);
@@ -201,74 +197,14 @@ public class SmartBusBookingGUI extends JFrame {
     }
     
     private void setupEventHandlers() {
-        // Search button
-        JButton searchButton = (JButton) ((JPanel) ((JPanel) mainPanel.getComponent(1)).getComponent(0)).getComponent(0).getComponent(5);
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String from = (String) fromComboBox.getSelectedItem();
-                String to = (String) toComboBox.getSelectedItem();
-                String date = dateField.getText();
-                
-                JOptionPane.showMessageDialog(SmartBusBookingGUI.this,
-                    "Searching buses from " + from + " to " + to + " on " + date,
-                    "Search Results", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        
-        // Book button
-        JButton bookButton = (JButton) ((JPanel) ((JPanel) mainPanel.getComponent(1)).getComponent(1)).getComponent(2);
-        bookButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String name = passengerNameField.getText();
-                String email = passengerEmailField.getText();
-                String phone = passengerPhoneField.getText();
-                
-                if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-                    JOptionPane.showMessageDialog(SmartBusBookingGUI.this,
-                        "Please fill in all passenger details",
-                        "Missing Information", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-                
-                if (selectedSeats.isEmpty()) {
-                    JOptionPane.showMessageDialog(SmartBusBookingGUI.this,
-                        "Please select at least one seat",
-                        "No Seats Selected", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-                
-                int result = JOptionPane.showConfirmDialog(SmartBusBookingGUI.this,
-                    "Confirm booking for " + name + "?\nSeats: " + selectedSeats + "\nTotal: " + totalPriceLabel.getText(),
-                    "Confirm Booking", JOptionPane.YES_NO_OPTION);
-                
-                if (result == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(SmartBusBookingGUI.this,
-                        "Booking confirmed! Booking ID: BK" + System.currentTimeMillis(),
-                        "Booking Successful", JOptionPane.INFORMATION_MESSAGE);
-                    
-                    // Reset form
-                    passengerNameField.setText("");
-                    passengerEmailField.setText("");
-                    passengerPhoneField.setText("");
-                    selectedSeats.clear();
-                    totalPriceLabel.setText("₹0");
-                }
-            }
-        });
+        // This method will be called after GUI creation
+        // Event handlers will be set up in the main method
     }
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                
                 new SmartBusBookingGUI().setVisible(true);
             }
         });
