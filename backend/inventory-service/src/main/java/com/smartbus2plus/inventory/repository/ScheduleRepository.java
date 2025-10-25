@@ -19,3 +19,4 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     @Query("SELECT s FROM Schedule s WHERE s.routeId = :routeId AND s.dayOfWeek = :dayOfWeek AND s.isActive = true")
     List<Schedule> findByRouteIdAndDayOfWeek(@Param("routeId") Long routeId, @Param("dayOfWeek") Integer dayOfWeek);
 }
+

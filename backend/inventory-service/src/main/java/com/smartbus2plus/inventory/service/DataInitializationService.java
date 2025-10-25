@@ -213,3 +213,4 @@ public class DataInitializationService implements CommandLineRunner {
         return new BigDecimal("1.0"); // Economy seats
     }
 }
+

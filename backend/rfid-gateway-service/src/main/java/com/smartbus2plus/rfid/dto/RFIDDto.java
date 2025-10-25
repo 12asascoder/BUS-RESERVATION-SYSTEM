@@ -175,3 +175,4 @@ public class RFIDDto {
         public void setAlertTime(LocalDateTime alertTime) { this.alertTime = alertTime; }
     }
 }
+

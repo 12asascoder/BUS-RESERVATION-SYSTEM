@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: api-gateway
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: ADMIN
   cloud:
     gateway:
       globalcors:

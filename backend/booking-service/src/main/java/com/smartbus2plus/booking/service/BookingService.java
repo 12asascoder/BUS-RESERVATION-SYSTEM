@@ -120,3 +120,4 @@ public class BookingService {
                 .orElseThrow(() -> new RuntimeException("Booking not found"));
     }
 }
+

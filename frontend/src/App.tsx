@@ -17,6 +17,7 @@ import PassengerBookingPage from './pages/PassengerBookingPage'
 import AnalyticsPage from './pages/AnalyticsPage'
 import ProfilePage from './pages/ProfilePage'
 import ReviewPage from './pages/ReviewPage'
+import LiveTrackingPage from './pages/LiveTrackingPage'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/analytics" element={<AnalyticsPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/reviews" element={<ReviewPage />} />
+            <Route path="/live-tracking" element={<LiveTrackingPage />} />
           </Routes>
           </Layout>
         </DataProvider>

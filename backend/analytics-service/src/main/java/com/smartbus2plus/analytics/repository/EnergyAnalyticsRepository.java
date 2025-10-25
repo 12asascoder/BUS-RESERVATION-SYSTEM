@@ -37,3 +37,4 @@ public interface EnergyAnalyticsRepository extends JpaRepository<EnergyAnalytics
     @Query("SELECT e FROM EnergyAnalytics e WHERE e.greenScore < :threshold ORDER BY e.tripDate DESC")
     List<EnergyAnalytics> findLowGreenScoreTrips(@Param("threshold") BigDecimal threshold);
 }
+

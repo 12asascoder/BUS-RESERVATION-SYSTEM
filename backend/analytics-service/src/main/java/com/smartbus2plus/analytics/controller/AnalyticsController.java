@@ -80,3 +80,4 @@ public class AnalyticsController {
         return ResponseEntity.ok("Analytics Service is running");
     }
 }
+

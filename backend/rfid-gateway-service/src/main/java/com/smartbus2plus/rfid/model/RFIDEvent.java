@@ -99,3 +99,4 @@ public class RFIDEvent {
     public String getMetadata() { return metadata; }
     public void setMetadata(String metadata) { this.metadata = metadata; }
 }
+

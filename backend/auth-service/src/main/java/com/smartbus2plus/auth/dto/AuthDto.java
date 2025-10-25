@@ -124,3 +124,4 @@ public class AuthDto {
         public void setRole(String role) { this.role = role; }
     }
 }
+

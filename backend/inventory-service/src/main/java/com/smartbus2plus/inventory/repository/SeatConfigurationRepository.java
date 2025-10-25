@@ -23,3 +23,4 @@ public interface SeatConfigurationRepository extends JpaRepository<SeatConfigura
     @Query("SELECT sc FROM SeatConfiguration sc WHERE sc.busId = :busId AND sc.seatType = :seatType")
     List<SeatConfiguration> findByBusIdAndSeatType(@Param("busId") Long busId, @Param("seatType") SeatConfiguration.SeatType seatType);
 }
+

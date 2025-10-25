@@ -50,3 +50,4 @@ public class AuthController {
                 .orElse(ResponseEntity.notFound().build());
     }
 }
+

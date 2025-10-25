@@ -293,3 +293,4 @@ INSERT INTO user_preferences (user_id, seat_preference, comfort_level, social_pr
 (5, 'AISLE', 'PREMIUM', 'SOCIAL', 'MODERATE', 'COOL');
 
 COMMIT;
+

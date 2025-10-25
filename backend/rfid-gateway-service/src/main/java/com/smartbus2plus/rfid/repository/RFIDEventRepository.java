@@ -30,3 +30,4 @@ public interface RFIDEventRepository extends JpaRepository<RFIDEvent, Long> {
     @Query("SELECT COUNT(r) FROM RFIDEvent r WHERE r.busId = :busId AND r.eventType = :eventType AND r.success = true")
     Long countSuccessfulEventsByBusAndType(@Param("busId") Long busId, @Param("eventType") RFIDEvent.EventType eventType);
 }
+

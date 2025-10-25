@@ -17,3 +17,4 @@ public class ApiGatewayApplication {
         System.out.println("🚌 SmartBus2+ API Gateway started successfully!");
     }
 }
+

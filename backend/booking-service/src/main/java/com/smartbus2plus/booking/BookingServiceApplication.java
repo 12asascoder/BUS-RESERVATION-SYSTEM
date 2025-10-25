@@ -17,3 +17,4 @@ public class BookingServiceApplication {
         System.out.println("🚌 SmartBus2+ Booking Service started successfully!");
     }
 }
+

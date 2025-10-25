@@ -19,3 +19,4 @@ public class IoTTelemetryServiceApplication {
         System.out.println("🚌 SmartBus2+ IoT Telemetry Service started successfully!");
     }
 }
+

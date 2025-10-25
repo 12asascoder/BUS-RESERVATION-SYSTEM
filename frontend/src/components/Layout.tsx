@@ -4,7 +4,6 @@ import { useAuth } from '../contexts/AuthContext'
 import { 
   HomeIcon, 
   UserIcon, 
-  Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
   TruckIcon,
   CpuChipIcon,
@@ -40,18 +39,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigation = user?.role === 'admin' ? [
     { name: 'Home', href: '/', icon: HomeIcon },
     { name: 'Dashboard', href: '/dashboard', icon: ChartBarIcon },
-    { name: 'Admin Booking', href: '/booking', icon: TruckIcon },
-    { name: 'Seat Map', href: '/seat-map', icon: Cog6ToothIcon },
     { name: 'IoT Dashboard', href: '/iot-dashboard', icon: CpuChipIcon },
     { name: 'RFID Boarding', href: '/rfid-boarding', icon: IdentificationIcon },
     { name: 'AI Assistant', href: '/ai-assistant', icon: SparklesIcon },
     { name: 'Analytics', href: '/analytics', icon: ChartBarIcon },
+    { name: 'Java Booking GUI', href: '/java-gui', icon: TruckIcon, external: true },
   ] : [
     { name: 'Home', href: '/', icon: HomeIcon },
-    { name: 'Book Journey', href: '/passenger-booking', icon: TruckIcon },
-    { name: 'My Bookings', href: '/profile', icon: UserIcon },
-    { name: 'Reviews', href: '/reviews', icon: StarIcon },
+    { name: 'Live Tracking', href: '/live-tracking', icon: CpuChipIcon },
     { name: 'AI Assistant', href: '/ai-assistant', icon: SparklesIcon },
+    { name: 'Reviews', href: '/reviews', icon: StarIcon },
+    { name: 'Profile', href: '/profile', icon: UserIcon },
+    { name: 'Java Booking GUI', href: '/java-gui', icon: TruckIcon, external: true },
   ]
 
   const isActive = (path: string) => location.pathname === path
@@ -80,20 +79,47 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Navigation */}
             <nav className="hidden lg:flex space-x-1">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 ${
-                    isActive(item.href)
-                      ? 'bg-white/20 text-white shadow-lg'
-                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                  }`}
-                >
-                  <item.icon className="w-5 h-5" />
-                  <span className="font-medium">{item.name}</span>
-                </Link>
-              ))}
+              {navigation.map((item) => {
+                if (item.external) {
+                  return (
+                    <button
+                      key={item.name}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        // Try to launch Java GUI
+                        if (navigator.userAgent.includes('Mac')) {
+                          // For macOS, try to run the shell script
+                          alert('Please run the Java Booking GUI manually:\n\n1. Open Terminal\n2. Navigate to project directory\n3. Run: ./run-java-gui.sh\n\nOr compile and run manually:\ncd java-gui && javac SmartBusBookingGUI.java && java SmartBusBookingGUI')
+                        } else {
+                          alert('Please run the Java Booking GUI manually:\n\n1. Open Command Prompt/Terminal\n2. Navigate to project directory\n3. Run: ./run-java-gui.sh\n\nOr compile and run manually:\ncd java-gui && javac SmartBusBookingGUI.java && java SmartBusBookingGUI')
+                        }
+                      }}
+                      className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 ${
+                        isActive(item.href)
+                          ? 'bg-white/20 text-white shadow-lg'
+                          : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span className="font-medium">{item.name}</span>
+                    </button>
+                  )
+                }
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 ${
+                      isActive(item.href)
+                        ? 'bg-white/20 text-white shadow-lg'
+                        : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                    }`}
+                  >
+                    <item.icon className="w-5 h-5" />
+                    <span className="font-medium">{item.name}</span>
+                  </Link>
+                )
+              })}
             </nav>
 
             {/* User Menu */}

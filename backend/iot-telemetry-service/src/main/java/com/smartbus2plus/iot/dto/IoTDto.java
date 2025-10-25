@@ -167,3 +167,4 @@ public class IoTDto {
         public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
     }
 }
+

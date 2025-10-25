@@ -19,3 +19,4 @@ public class AIAssistServiceApplication {
         System.out.println("🚌 SmartBus2+ AI Assist Service started successfully!");
     }
 }
+

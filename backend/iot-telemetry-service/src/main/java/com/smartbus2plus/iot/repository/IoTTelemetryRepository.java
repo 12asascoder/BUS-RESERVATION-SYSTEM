@@ -28,3 +28,4 @@ public interface IoTTelemetryRepository extends JpaRepository<IoTTelemetry, Long
     @Query("SELECT t FROM IoTTelemetry t WHERE t.busId = :busId AND t.location = :location ORDER BY t.timestamp DESC")
     List<IoTTelemetry> findByBusIdAndLocationOrderByTimestampDesc(@Param("busId") Long busId, @Param("location") String location);
 }
+

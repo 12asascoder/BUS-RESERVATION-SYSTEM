@@ -58,3 +58,4 @@ public class RFIDGatewayController {
         return ResponseEntity.ok("RFID Gateway Service is running");
     }
 }
+

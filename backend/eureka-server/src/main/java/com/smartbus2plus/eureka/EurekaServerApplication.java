@@ -17,3 +17,4 @@ public class EurekaServerApplication {
         System.out.println("🚌 SmartBus2+ Eureka Server started successfully!");
     }
 }
+

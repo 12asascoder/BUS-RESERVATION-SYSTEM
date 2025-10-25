@@ -19,3 +19,4 @@ public class AnalyticsServiceApplication {
         System.out.println("🚌 SmartBus2+ Analytics Service started successfully!");
     }
 }
+

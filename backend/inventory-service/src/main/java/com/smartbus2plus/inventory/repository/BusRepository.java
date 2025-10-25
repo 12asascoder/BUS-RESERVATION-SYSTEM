@@ -16,3 +16,4 @@ public interface BusRepository extends JpaRepository<Bus, Long> {
     Optional<Bus> findByBusNumber(String busNumber);
     List<Bus> findByCompanyIdAndIsActiveTrue(Long companyId);
 }
+

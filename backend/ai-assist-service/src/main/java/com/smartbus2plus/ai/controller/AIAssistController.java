@@ -90,3 +90,4 @@ public class AIAssistController {
         return ResponseEntity.ok("AI Assist Service is running");
     }
 }
+

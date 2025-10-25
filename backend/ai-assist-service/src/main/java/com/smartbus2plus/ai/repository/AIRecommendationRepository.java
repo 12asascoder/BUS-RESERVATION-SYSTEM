@@ -31,3 +31,4 @@ public interface AIRecommendationRepository extends JpaRepository<AIRecommendati
     @Query("SELECT COUNT(r) FROM AIRecommendation r WHERE r.userId = :userId AND r.isApplied = true")
     Long countAppliedRecommendationsByUser(@Param("userId") Long userId);
 }
+

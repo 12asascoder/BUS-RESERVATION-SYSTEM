@@ -19,3 +19,4 @@ public class RFIDGatewayServiceApplication {
         System.out.println("🚌 SmartBus2+ RFID Gateway Service started successfully!");
     }
 }
+

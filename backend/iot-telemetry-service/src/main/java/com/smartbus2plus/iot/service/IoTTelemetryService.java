@@ -142,3 +142,4 @@ public class IoTTelemetryService {
         return new IoTDto.BusEnvironmentData(busId, temperature, humidity, vibration, noiseLevel, speed);
     }
 }
+

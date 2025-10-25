@@ -74,3 +74,4 @@ public class IoTTelemetryController {
         return ResponseEntity.ok("IoT Telemetry Service is running");
     }
 }
+

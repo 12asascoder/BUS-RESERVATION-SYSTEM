@@ -100,3 +100,4 @@ public class BookingController {
         return ResponseEntity.ok("Booking Service is running");
     }
 }
+
