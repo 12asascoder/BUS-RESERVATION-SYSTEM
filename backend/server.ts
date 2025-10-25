@@ -300,7 +300,7 @@ app.post('/api/bookings', authenticateToken, [
       data: {
         userId,
         busId,
-        seats: requestedSeats,
+        seats: JSON.stringify(requestedSeats),
         passengerName,
         passengerEmail,
         passengerPhone,

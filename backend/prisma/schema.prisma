@@ -50,7 +50,7 @@ model Booking {
   id             String   @id @default(cuid())
   userId         String
   busId          String
-  seats          String[] // Array of seat numbers like ["1A", "2B"]
+  seats          String   // JSON string of seat numbers like "[\"1A\", \"2B\"]"
   passengerName  String
   passengerEmail String
   passengerPhone String

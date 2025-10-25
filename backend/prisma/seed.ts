@@ -201,7 +201,7 @@ async function main() {
       data: {
         userId: passengers[0].id,
         busId: buses[0].id,
-        seats: ['1A', '1B'],
+        seats: JSON.stringify(['1A', '1B']),
         passengerName: 'John Doe',
         passengerEmail: 'john@example.com',
         passengerPhone: '+91-9876543211',
@@ -213,7 +213,7 @@ async function main() {
       data: {
         userId: passengers[1].id,
         busId: buses[1].id,
-        seats: ['2A'],
+        seats: JSON.stringify(['2A']),
         passengerName: 'Jane Smith',
         passengerEmail: 'jane@example.com',
         passengerPhone: '+91-9876543212',
